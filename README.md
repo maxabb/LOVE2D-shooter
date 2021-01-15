@@ -1,5 +1,5 @@
 # LOVE2D-shooter
-Very simple space invaders like shooter game made using the love2d framework
+Very simple space invaders like shooter game made using the love2d framework, first game i've made in love2d, and although it isn't much im proud of it
 
 ## Controls
 * On keyboard, a & d to move left and right and space to shoot
