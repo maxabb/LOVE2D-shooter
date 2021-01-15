@@ -13,6 +13,7 @@ function love.load()
     bullets = {}
     enemies = {}
     velocity = 1000;
+    enemySpeed = 1
 
     font = love.graphics.newFont("fonts/font.ttf", 30)
 
@@ -53,7 +54,7 @@ function love.update(dt)
         end
 
         for index, enemy in pairs(enemies) do
-            enemy.y = enemy.y + 1
+            enemy.y = enemy.y + enemySpeed
 
             if enemy.y > 900 then
                 enemies[index] = nil;
