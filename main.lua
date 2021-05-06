@@ -20,6 +20,27 @@ function love.load()
     math.randomseed(os.time())
 end
 
+function read_input_left()
+    if joystick then
+        return love.keyboard.isDown('d') or joystick:getGamepadAxis("leftx") > 0.1 or joystick:isGamepadDown("dpright")
+    end
+    return love.keyboard.isDown('d')
+end
+
+function read_input_right()
+    if joystick then
+        return love.keyboard.isDown('a') or joystick:getGamepadAxis("leftx") < -0.1 or joystick:isGamepadDown("dpleft")
+    end
+    return love.keyboard.isDown('a')
+end
+
+function read_input_fire()
+    if joystick then
+        return love.keyboard.isDown('space') or joystick:getGamepadAxis("triggerright") > 0.1
+    end
+    return love.keyboard.isDown('space')
+end
+
 function love.keypressed(key)
     if (key == 'escape') then
         love.event.quit()
@@ -30,14 +51,14 @@ enemyDelay = 2
 count = enemyDelay
 function love.update(dt)
     if playing then
-        if ((love.keyboard.isDown('d') or joystick:getGamepadAxis("leftx") > 0.1 or joystick:isGamepadDown("dpright")) and player.x < 550) then
+        if read_input_left() and player.x < 550 then
             player.x = player.x + player.s * dt
         end
-        if ((love.keyboard.isDown('a') or joystick:getGamepadAxis("leftx") < -0.1 or joystick:isGamepadDown("dpleft")) and player.x > 0) then
+        if read_input_right() and player.x > 0 then
             player.x = player.x - player.s * dt
         end
 
-        if ((love.keyboard.isDown('space') or joystick:getGamepadAxis("triggerright") > 0.1) and player.d < 0) then
+        if read_input_fire() and player.d < 0 then
             table.insert(bullets, create_bullet())
             player.d = 0.1
             score = score - 1
